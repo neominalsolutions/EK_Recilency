@@ -1,6 +1,7 @@
 ﻿using API1.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Polly;
 
 namespace API1.Controllers
 {
@@ -32,9 +33,10 @@ namespace API1.Controllers
       //  return Ok(plist);
       //}
 
+
       var response = await api2.GetFromJsonAsync<List<ProductDto>>("/api/products");
 
-      return Ok(response);
+      return StatusCode(500);
     } 
 
 

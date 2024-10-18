@@ -15,11 +15,25 @@ namespace API2.Controllers
     public async Task<IActionResult> GetProducts()
     {
 
+      // Timeout Testi için kullandık
+      // Thread.Sleep(3500); // Main Thread kitledik
+
+
+      // Retry testi için API2 down olmalıdır. Sonra dotnet run komutu ile API2 terminalden ayağa kaldırdığımızda aslında isteğin retry girip devam ettiğini görebiliriz.
+
       var plist = new List<ProductDto>();
       plist.Add(new ProductDto("P-1", 10, 12));
       plist.Add(new ProductDto("P-2", 10, 13));
 
-      return Ok(plist);
+
+      // Circuit Braker Pattern simüle edelim. Custom Exception fırlatalım.
+
+      int a = 5;
+      int b = 0;
+
+      //int divededByZero = a / b;
+
+      return StatusCode(500);
     }
 
   }
