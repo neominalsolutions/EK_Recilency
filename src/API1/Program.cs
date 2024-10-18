@@ -34,8 +34,8 @@ builder.Services
 
 })
   .AddPolicyHandler(recilency.CreateRetryPolicy(retryCount: 3, sleepDuration: TimeSpan.FromSeconds(2)))
-  .AddPolicyHandler(recilency.CreateTimeoutPolicy(timeout: TimeSpan.FromSeconds(3)));
-  //.AddPolicyHandler(recilency.CreateCircuitBrakerPolicy(errorCount:3,timeOfBreak: TimeSpan.FromSeconds(10)))
+  .AddPolicyHandler(recilency.CreateTimeoutPolicy(timeout: TimeSpan.FromSeconds(3)))
+  .AddPolicyHandler(recilency.CreateCircuitBrakerPolicy(errorCount: 2, timeOfBreak: TimeSpan.FromSeconds(10)));
   //;
 
 // Not: 3 kez ara arkaya http request iþleminde hata meydana gelirse 3 saniye api hizmetine ait endpoint tetiklenemesin. API request overload olmasýný engeller.

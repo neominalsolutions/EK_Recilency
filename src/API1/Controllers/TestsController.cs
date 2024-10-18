@@ -36,7 +36,7 @@ namespace API1.Controllers
 
       var response = await api2.GetFromJsonAsync<List<ProductDto>>("/api/products");
 
-      return StatusCode(500);
+      return Ok(response);
     } 
 
 

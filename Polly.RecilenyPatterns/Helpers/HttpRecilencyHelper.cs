@@ -68,25 +68,16 @@ namespace Polly.RecilenyPatterns.Helpers
     /// <returns></returns>
     public IAsyncPolicy<HttpResponseMessage> CreateCircuitBrakerPolicy(int errorCount,TimeSpan timeOfBreak)
     {
-      return HttpPolicyExtensions
-        .HandleTransientHttpError() // 5xx hata kodları ve 408 hata kodu için 
-        .Or<Exception>() // kendi exceptionlarımzada ayrıca girsin diye yaptık. Normalde HttpRequestException için çalışır.
-        .CircuitBreakerAsync(errorCount, timeOfBreak,
-        onBreak: (exception,duration) =>
+      return HttpPolicyExtensions.HandleTransientHttpError()
+        .Or<Exception>().CircuitBreakerAsync(errorCount, timeOfBreak, onBreak: (exception, duration) =>
         {
-          // logger.LogInformation($"Hizmet kesintisi kısmı");
-
-          logger.LogInformation("onBreak");
-        }, 
-        onReset:  () =>
+          Console.WriteLine("onBreak");
+        }, onReset: () =>
         {
-          logger.LogInformation("onReset");
-          //logger.LogInformation("Hizmete devam et.Burada timeOfBreak kadar beklendi sonra hizmet kesintisi bitti. Circuit Braker açık konuma geçti. Taki bir daha hata olana kadar açık kalacak.");
-     
+          Console.WriteLine("onReset");
         });
     }
-
-
   }
+
 
 }

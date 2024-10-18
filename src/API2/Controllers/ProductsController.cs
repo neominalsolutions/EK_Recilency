@@ -33,7 +33,9 @@ namespace API2.Controllers
 
       //int divededByZero = a / b;
 
-      return StatusCode(500);
+      throw new Exception("Hata");
+
+      return Ok(plist);
     }
 
   }
